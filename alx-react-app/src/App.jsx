@@ -4,6 +4,8 @@ import WelcomeMessage from './components/WelcomeMessage.jsx';
 import Header from './components/Header.jsx';
 import MainContent from './components/MainContent.jsx';
 import Footer from './components/Footer.jsx';
+import UserProfile from './components/UserProfile.jsx'; 
+
 function App() {
   return (
     <>
@@ -11,6 +13,7 @@ function App() {
       <Header />
       <MainContent />
       <Footer />
+      <UserProfile name="John Doe" age={30} bio="Avid traveler and city explorer." />
     </>
   );
 }

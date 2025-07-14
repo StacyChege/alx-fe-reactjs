@@ -4,12 +4,18 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import WelcomeMessage from 'alx-fe-reactjs/alx-react-app/src/components/WelcomeMessage.jsx'
+import Header from 'alx-fe-reactjs/alx-react-app/src/components/Header.jsx'
+import MainContent from 'alx-fe-reactjs/alx-react-app/src/components/MainContent.jsx'
+import Footer from 'alx-fe-reactjs/alx-react-app/src/components/Footer.jsx'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
       <div>
+        <Header />
+        <MainContent />
+        <Footer />
         <WelcomeMessage />
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

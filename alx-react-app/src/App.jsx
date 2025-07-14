@@ -1,19 +1,16 @@
 import "./App.css";
 
-import WelcomeMessage from "./components/WelcomeMessage.jsx";
-// import Header from 'alx-fe-reactjs/alx-react-app/src/components/Header.jsx'
-// import MainContent from 'alx-fe-reactjs/alx-react-app/src/components/MainContent.jsx'
-// import Footer from 'alx-fe-reactjs/alx-react-app/src/components/Footer.jsx'
+import WelcomeMessage from './components/WelcomeMessage.jsx';
+import Header from './components/Header.jsx';
+import MainContent from './components/MainContent.jsx';
+import Footer from './components/Footer.jsx';
 function App() {
   return (
     <>
-      <div>
-        <WelcomeMessage />
-
-        {/* <Header /> */}
-        {/* <MainContent /> */}
-        {/* <Footer /> */}
-      </div>
+      <WelcomeMessage />
+      <Header />
+      <MainContent />
+      <Footer />
     </>
   );
 }

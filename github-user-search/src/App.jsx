@@ -14,17 +14,6 @@ const App = () => {
 
 import React from "react";
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <h1>GitHub User Search</h1>
-        <Routes>
-          <Route path="/" element={<Search />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-}
+
 
 export default App;

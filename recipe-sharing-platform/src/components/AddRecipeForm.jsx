@@ -1,39 +1,36 @@
 import React, { useState } from "react";
 
 export default function AddRecipeForm() {
-  // State to track input values
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [steps, setSteps] = useState(""); // ✅ renamed from instructions
   const [errors, setErrors] = useState({});
 
-  // Validation & submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newErrors = {};
 
-    // Simple validation
+    // Validation
     if (!title.trim()) newErrors.title = "Title is required.";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required.";
     else if (ingredients.split(",").length < 2)
       newErrors.ingredients = "Please enter at least 2 ingredients separated by commas.";
-    if (!instructions.trim()) newErrors.instructions = "Instructions are required.";
+    if (!steps.trim()) newErrors.steps = "Steps are required."; // ✅ updated
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      // Here you would normally send data to backend or update state
       console.log({
         title,
         ingredients: ingredients.split(",").map((i) => i.trim()),
-        instructions: instructions.split(".").map((i) => i.trim()),
+        steps: steps.split(".").map((s) => s.trim()), // ✅ updated
       });
 
       // Clear form
       setTitle("");
       setIngredients("");
-      setInstructions("");
+      setSteps("");
       alert("Recipe submitted successfully!");
     }
   };
@@ -67,16 +64,16 @@ export default function AddRecipeForm() {
           {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
         </div>
 
-        {/* Instructions */}
+        {/* Steps */}
         <div>
           <label className="block text-gray-700 font-semibold mb-1">Preparation Steps (period separated)</label>
           <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             rows="6"
             className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-gray-900"
           ></textarea>
-          {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
         {/* Submit Button */}

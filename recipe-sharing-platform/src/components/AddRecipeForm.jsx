@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 export default function AddRecipeForm() {
+  // State
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [steps, setSteps] = useState(""); // ✅ renamed from instructions
+  const [steps, setSteps] = useState(""); // ✅ exactly "steps"
   const [errors, setErrors] = useState({});
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -14,17 +16,16 @@ export default function AddRecipeForm() {
     // Validation
     if (!title.trim()) newErrors.title = "Title is required.";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required.";
-    else if (ingredients.split(",").length < 2)
-      newErrors.ingredients = "Please enter at least 2 ingredients separated by commas.";
-    if (!steps.trim()) newErrors.steps = "Steps are required."; // ✅ updated
+    if (!steps.trim()) newErrors.steps = "Steps are required.";
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      // Log the form data (replace with API call if needed)
       console.log({
         title,
-        ingredients: ingredients.split(",").map((i) => i.trim()),
-        steps: steps.split(".").map((s) => s.trim()), // ✅ updated
+        ingredients,
+        steps,
       });
 
       // Clear form
@@ -54,7 +55,7 @@ export default function AddRecipeForm() {
 
         {/* Ingredients */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-1">Ingredients (comma separated)</label>
+          <label className="block text-gray-700 font-semibold mb-1">Ingredients</label>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
@@ -66,7 +67,7 @@ export default function AddRecipeForm() {
 
         {/* Steps */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-1">Preparation Steps (period separated)</label>
+          <label className="block text-gray-700 font-semibold mb-1">Preparation Steps</label>
           <textarea
             value={steps}
             onChange={(e) => setSteps(e.target.value)}

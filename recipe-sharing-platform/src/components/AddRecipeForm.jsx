@@ -1,34 +1,35 @@
 import React, { useState } from "react";
 
 export default function AddRecipeForm() {
-  // State
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [steps, setSteps] = useState(""); // ✅ exactly "steps"
+  const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  // ✅ Separate validate function
+  const validate = () => {
     const newErrors = {};
 
-    // Validation
     if (!title.trim()) newErrors.title = "Title is required.";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required.";
     if (!steps.trim()) newErrors.steps = "Steps are required.";
 
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newErrors = validate(); // ✅ call validate function
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      // Log the form data (replace with API call if needed)
       console.log({
         title,
         ingredients,
         steps,
       });
 
-      // Clear form
       setTitle("");
       setIngredients("");
       setSteps("");

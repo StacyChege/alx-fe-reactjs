@@ -1,28 +1,49 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-  
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!username || !email || !password) {
-      setMessage('All fields are required');
-      return;
+    // Create an empty errors object to store validation messages
+    const newErrors = {};
+    
+    // Check if the username is empty
+    if (!username) {
+      newErrors.username = 'Username is required.';
     }
+    
+    // Check if the email is empty
+    if (!email) {
+      newErrors.email = 'Email is required.';
+    }
+    
+    // Check if the password is empty
+    if (!password) {
+      newErrors.password = 'Password is required.';
+    }
+    
+    // Update the state with any new errors found
+    setErrors(newErrors);
 
-    setMessage('Registration successful');
-    console.log('Form data submitted:', { username, email, password });
+    // If the newErrors object is empty, there were no validation errors
+    if (Object.keys(newErrors).length === 0) {
+      setMessage('Registration successful!');
+      console.log('Form data submitted:', { username, email, password });
+    } else {
+      setMessage('Please correct the errors and try again.');
+    }
   };
 
   return (
     <div>
       <h2>User Registration</h2>
       <form onSubmit={handleSubmit}>
-        {/* Username Input */}
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -31,8 +52,8 @@ const RegistrationForm = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
 
-        {/* Email Input */}
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -41,8 +62,8 @@ const RegistrationForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
 
-        {/* Password Input */}
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -51,6 +72,7 @@ const RegistrationForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
         
         <button type="submit">Register</button>
       </form>

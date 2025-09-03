@@ -11,34 +11,32 @@ const RegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Create an empty errors object
+    // Create an empty errors object to store validation messages
     const newErrors = {};
     
-    // Check if the username field is empty
+    // Check if the username is empty
     if (!username) {
       newErrors.username = 'Username is required.';
     }
     
-    // Check if the email field is empty
+    // Check if the email is empty
     if (!email) {
       newErrors.email = 'Email is required.';
     }
     
-    // Check if the password field is empty
+    // Check if the password is empty
     if (!password) {
       newErrors.password = 'Password is required.';
     }
     
-    // Set the new errors object in state
+    // Update the state with any new errors found
     setErrors(newErrors);
 
-    // If there are no errors, proceed with form submission logic
+    // If the newErrors object is empty, there were no validation errors
     if (Object.keys(newErrors).length === 0) {
       setMessage('Registration successful!');
       console.log('Form data submitted:', { username, email, password });
-      // You can add logic to clear the form here if needed
     } else {
-      // If there are errors, display a general message
       setMessage('Please correct the errors and try again.');
     }
   };
